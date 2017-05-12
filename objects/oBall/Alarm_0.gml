@@ -1,0 +1,1 @@
+shotDirection = 0;
