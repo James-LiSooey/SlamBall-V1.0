@@ -1,5 +1,5 @@
 //player collect ball
-if(place_meeting(x,y,oPlayer)){
+if(place_meeting(x,y,oPlayer) and collectible){
 	
 	playerInst = instance_nearest(x,y,oPlayer);
 	playerInst.possession = true;
@@ -32,9 +32,6 @@ if(shotPower>0){
 		break;
 		
 	}
-
-
-
 	shotPower = 0;
 	alarm[0] = 180;
 }

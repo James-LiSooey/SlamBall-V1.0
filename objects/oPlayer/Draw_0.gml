@@ -52,6 +52,14 @@ if (!attacking) {
         case ROLL:
             // Don't do stuff here    
         break;
+		
+		case SHOOTING:
+			sprite_index = sPlayerIdleShield;
+		break;
+		
+		case RECOIL:
+			//dont do stuff
+		break;
     }
 }
 

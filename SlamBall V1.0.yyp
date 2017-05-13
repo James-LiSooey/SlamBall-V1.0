@@ -455,6 +455,14 @@
             }
         },
         {
+            "Key": "4797f30f-8425-4427-829f-334ccd93c55b",
+            "Value": {
+                "id": "1eb88635-a0b9-4415-a6d8-d9ec905257da",
+                "resourcePath": "objects\\oEffect_ScreenShake\\oEffect_ScreenShake.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
             "Key": "4c074ce1-3333-4a12-9e9d-e33ab358424f",
             "Value": {
                 "id": "e2b0213c-e8e6-4402-a972-93038b926014",
@@ -543,6 +551,14 @@
             }
         },
         {
+            "Key": "5e073dfd-6ab5-4514-9c4b-87cfc275aae3",
+            "Value": {
+                "id": "6a830513-941f-48e9-b945-a01f741adbe1",
+                "resourcePath": "scripts\\effects_ScreenShake\\effects_ScreenShake.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "5f44068c-6ea7-4a52-84da-66ed90fc629d",
             "Value": {
                 "id": "0af29616-c86e-434e-8423-1fc9e066f3aa",
@@ -620,6 +636,14 @@
                 "id": "ca23b236-82f5-4057-9716-82ba80cf324b",
                 "resourcePath": "sprites\\sPlayerSlideShield\\sPlayerSlideShield.yy",
                 "resourceType": "GMSprite"
+            }
+        },
+        {
+            "Key": "65f06d00-ec8d-4b01-9377-3e50211c0799",
+            "Value": {
+                "id": "24c3b6f2-1184-442c-aef5-9bc9285d20d9",
+                "resourcePath": "objects\\oGameContoller\\oGameContoller.yy",
+                "resourceType": "GMObject"
             }
         },
         {
@@ -772,6 +796,14 @@
                 "id": "f50f7130-3c76-49e6-bc91-a538293e4a54",
                 "resourcePath": "sprites\\bgClouds\\bgClouds.yy",
                 "resourceType": "GMSprite"
+            }
+        },
+        {
+            "Key": "86cc6043-1985-4bd1-b088-430fb06b395e",
+            "Value": {
+                "id": "7675e1ef-57fe-4e3b-a439-12b05bb443f1",
+                "resourcePath": "objects\\oGoal1\\oGoal1.yy",
+                "resourceType": "GMObject"
             }
         },
         {
@@ -1023,6 +1055,14 @@
             }
         },
         {
+            "Key": "bde49b65-fc26-4082-bffe-4f694b470afc",
+            "Value": {
+                "id": "624e2462-1dca-4372-a1a9-6b4d0c4b7190",
+                "resourcePath": "objects\\oParGoal\\oParGoal.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
             "Key": "be81c9dd-a133-42ae-bb9c-4f1c3e1da03c",
             "Value": {
                 "id": "34959bfb-6974-41be-8b41-315020cbcab2",
@@ -1239,6 +1279,14 @@
             }
         },
         {
+            "Key": "ead2fa17-ba9f-47d2-bfeb-2fc4201dc5c1",
+            "Value": {
+                "id": "fbd2f97d-8c61-4b27-9fa8-442255390f13",
+                "resourcePath": "scripts\\goal\\goal.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "eb613ebc-0c7e-4556-8485-45ba64839d28",
             "Value": {
                 "id": "93af035f-39b2-4437-821f-a788202d3f96",
@@ -1255,6 +1303,14 @@
             }
         },
         {
+            "Key": "ec365242-646f-4646-ada0-ab99f3d26a33",
+            "Value": {
+                "id": "0aa4ed27-2444-494b-aeea-0a9ba9489905",
+                "resourcePath": "views\\ec365242-646f-4646-ada0-ab99f3d26a33.yy",
+                "resourceType": "GMFolder"
+            }
+        },
+        {
             "Key": "ecccfb57-dc51-4efc-81dc-c1f4c251072d",
             "Value": {
                 "id": "d8bc6998-ec80-4c02-b706-faf646d02ab9",
@@ -1268,6 +1324,14 @@
                 "id": "a6847160-2167-4d92-8a85-f4add0bfe25f",
                 "resourcePath": "views\\ed537475-0010-4ed7-8e14-6579674ccd52.yy",
                 "resourceType": "GMFolder"
+            }
+        },
+        {
+            "Key": "ef3288a8-9246-4e20-ac6b-5a1045d464b1",
+            "Value": {
+                "id": "b6998739-af1d-4337-a6bd-2a7d4881b65d",
+                "resourcePath": "objects\\oScoreController\\oScoreController.yy",
+                "resourceType": "GMObject"
             }
         },
         {
@@ -1335,6 +1399,14 @@
             }
         },
         {
+            "Key": "fab4ab57-9e5c-4266-a950-d3786af4ea2f",
+            "Value": {
+                "id": "efca3b6a-fc2f-4591-82d8-7e701013bb59",
+                "resourcePath": "sprites\\sGoal1\\sGoal1.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
             "Key": "fac0997e-f800-4ce0-bdbc-30721a6bc859",
             "Value": {
                 "id": "27598828-5386-4feb-a060-5654e6a836f6",
@@ -1370,13 +1442,15 @@
         "4c964219-103f-4bae-8fb1-8ff7f9e7d136",
         "5f44068c-6ea7-4a52-84da-66ed90fc629d",
         "21e273fd-f794-4066-a9d4-e4771c05a2bd",
+        "818e8326-ee61-48cf-bebf-a83477e70472",
+        "5e073dfd-6ab5-4514-9c4b-87cfc275aae3",
         "346df86e-32b3-44cc-81d5-2fba386c2e55",
         "9e06057c-68af-4f8d-b0ca-4ce72872ed81",
         "062fe218-b9df-4a92-a782-f84032f82292",
         "97c5442f-882c-4928-a486-5adb1b51cd85",
         "15e3d07c-a70c-43a7-8bc6-a5717d9d133f",
         "ce9667dd-fd83-45b9-9a95-f798c27654d4",
-        "818e8326-ee61-48cf-bebf-a83477e70472"
+        "ead2fa17-ba9f-47d2-bfeb-2fc4201dc5c1"
     ],
     "tutorial": ""
 }

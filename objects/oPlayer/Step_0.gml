@@ -50,7 +50,9 @@ if (((kRight && cLeft) || (kLeft && cRight)) && canStick && !onGround) {
 
 // Handle gravity
 if (!onGround and (state != ROLL)) {
-    if ((cLeft || cRight) && vy >= 0) {
+    if(state = SHOOTING){
+		vy = Approach(vy, vyMax, gravShot);
+	}else if ((cLeft || cRight) && vy >= 0) {
         // Wall slide
         vy = Approach(vy, vyMax, gravSlide);
     } else {
@@ -59,7 +61,7 @@ if (!onGround and (state != ROLL)) {
     }
 }
 
-if (state != ROLL) {
+if (state != ROLL and state !=SHOOTING) {
 // Left 
 if (kLeft && !kRight && !sticking) {
     facing = -1;
@@ -85,7 +87,7 @@ if (kLeft && !kRight && !sticking) {
 if (!kRight && !kLeft) {
     vx = Approach(vx, 0, tempFric);
     
-    if (state != ROLL)
+    if (state != ROLL and state != SHOOTING)
         state = IDLE;
 } 
        
@@ -119,27 +121,18 @@ if (kJump && cRight && !onGround) {
 }
  
 // Jump 
-if (kJump) { 
+if (kJump) {
+	//first jump 
     if (onGround) {
-        // Fall thru platform
-        if (kDown) {
-            if (place_meeting(x, y + 4, oParJumpThru))
-                ++y;
-		//first jump
-        } else {
-            vy = -jumpHeight;
-            
-            yscale = 1.33;
-            xscale = 0.67;
-			++jumpCount;
-        }
+        vy = -jumpHeight;
+        yscale = 1.33;
+        xscale = 0.67;
+		++jumpCount;
 	//Double Jump
     }else if(jumpCount<2){
 		vy = -jumpHeight;
-            
         yscale = 1.33;
         xscale = 0.67;
-		
 		++jumpCount;
 	}
 // Variable jumping
@@ -149,18 +142,54 @@ if (kJump) {
 	}
 }
 
+if (onGround) {
+        // Fall thru platform
+    if (kDown) {
+        if (place_meeting(x, y + 4, oParJumpThru)){
+            ++y;
+		}
+	}
+}
+
 // Jump state
-if (!onGround and (state != ROLL))
+if (!onGround and (state != ROLL) and state != SHOOTING)
     state = JUMP;
 // Run particles
 else if (random(100) > 85 && abs(vx) > 0.5)
     instance_create(x, y + 8, oParticlePlayer);
 
 // Swap facing during wall slide
-if (cRight && !onGround && (state!=ROLL))
+if (cRight && !onGround && (state!=ROLL)and state != SHOOTING)
     facing = -1;
-else if (cLeft && !onGround && (state!=ROLL))
+else if (cLeft && !onGround && (state!=ROLL)and state != SHOOTING)
     facing = 1;
+
+// shot charging
+if (!kBlock and kShoot and state!=ROLL and !cancel) {
+	if(possession){
+		if(shotPower<45){
+			shotPower += 1.5
+		} else if(shotPower<60){
+			shotPower += 1
+		}else if(shotPower<90){
+			shotPower += .5
+		}else{
+			shotPower += .25	
+		}
+		facing = team;
+		//can't move while shooting and apply shooting gravity
+		if(state!=SHOOTING){
+			vy = 0; 
+			vy = Approach(vy, vyMax, gravShot);
+			vx = (-1)*team*3;
+		}else{
+			vx = 0;
+		}
+		state = SHOOTING;
+		//vy = Approach(vy, vyMax, gravShot); vx = 0;	
+	}
+}
+
 
 // Roll
 //if (onGround && !attacking) {
@@ -181,11 +210,19 @@ if (!attacking) {
             }else{
 				facing = facingPrev;
 			}					
-			
+			//add screenshake for roll duration (14 frames)
+			if(onGround){
+				effects_ScreenShake(0,2,14);
+			}else{
+				effects_ScreenShake(0,1,5);
+			}
             image_index  = 0;
             image_speed  = 0.5;
             sprite_index = sPlayerRoll;
-            
+            if(state = SHOOTING){
+				cancel = true;
+			}			
+			
             state = ROLL;
         }
     }
@@ -199,52 +236,52 @@ if (state == ROLL) {
         //if (!onGround || (cLeft || cRight)) {
 	if ((cLeft || cRight)) {
         state = IDLE;
-        if (!attacking)
+        if (!attacking){
             alarm[1] = -1;
+		}
     }
 }
 
 // shuffle
-if(kShuffle && state != ROLL){
+if(kShuffle and state != ROLL and state != SHOOTING){
 	facing = team;
 }
     
-// Action
-if (!kBlock && kShoot) {
-	if(possession){
-		if(shotPower<45){
-			shotPower += 1.5
-		} else if(shotPower<60){
-			shotPower += 1
-		}else if(shotPower<90){
-			shotPower += .5
-		}else{
-			shotPower += .25	
-		}
-	}
-}
+
 
 //Shoot Ball
 if(kShootRelease and possession){
-	possession = false;
-	insBall = instance_create(x+20,y-8,oBall);
-	if(shotPower<20){
-		insBall.shotPower = 60;
-		insBall.shotType = 12;
+	if(cancel){
+		cancel = false;
+		state = IDLE;
+		shotPower = 0;
 	}else{
-		insBall.shotPower = shotPower;
-		insBall.shotType = 11;
+		state = IDLE;
+		possession = false;
+		insBall = instance_create(x,y-8,oBall);
+		if(shotPower<15){
+			vx = (-1)*team*6;
+			shotPower = 80;
+			insBall.shotPower = shotPower;
+			insBall.shotType = 12;
+			effects_ScreenShake(5,5,5);
+		}else{
+			vx = (-1)*team*4;
+			shotPower = min(shotPower,100)
+			insBall.shotPower = shotPower;
+			insBall.shotType = 11;
+			effects_ScreenShake(2,2,5);
+		}
+		insBall.targetGoal = targetGoal;
+		insBall.shotDirection = team;
+		shotPower = 0;
 	}
-	insBall.targetGoal = targetGoal;
-	insBall.shotDirection = team;
-	shotPower = 0;
 }
 
 blocking = kBlock;
 
 /* */
 /// Squash + stretch
-
 xscale = Approach(xscale, 1, 0.05);
 yscale = Approach(yscale, 1, 0.05);
 

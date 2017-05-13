@@ -6,6 +6,7 @@ event_inherited();
 // Semi States
 facing = 1;
 jumpCount = 0;
+cancel = false;
 
 // Movement ///////////////////////////////////////////////////////////////////
 
@@ -18,6 +19,7 @@ vyMax       = 5.0;
 jumpHeight  = 9.00;
 gravNorm    = 0.38;
 gravSlide   = 0.10; 
+gravShot    = 0.05; 
 clingTime   = 4.0;
 
 
@@ -41,7 +43,8 @@ IDLE     = 10;
 RUN      = 11;
 JUMP     = 12;
 ROLL     = 13;
-SHOOTING = 14
+SHOOTING = 14;
+RECOIL   = 15;
 
 // Initialize properties
 state  = IDLE;
