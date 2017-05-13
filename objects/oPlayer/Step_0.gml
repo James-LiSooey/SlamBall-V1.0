@@ -261,7 +261,7 @@ if(kShootRelease and possession){
 		insBall = instance_create(x,y-8,oBall);
 		if(shotPower<15){
 			vx = (-1)*team*6;
-			shotPower = 80;
+			shotPower = 100;
 			insBall.shotPower = shotPower;
 			insBall.shotType = 12;
 			effects_ScreenShake(5,5,5);
