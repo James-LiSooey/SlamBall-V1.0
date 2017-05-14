@@ -13,7 +13,7 @@ kJump          = keyboard_check_pressed(ord("S"))  || gamepad_button_check_press
 kJumpRelease   = keyboard_check_released(ord("S")) || gamepad_button_check_released(0, gp_face1);
 
 kAction        = keyboard_check_pressed(ord("X"))  || gamepad_button_check_pressed(0, gp_face3);
-kShoot         = keyboard_check(ord("E"))           || gamepad_button_check_pressed(0, gp_face4);  
+kShoot         = keyboard_check(ord("E"))          || gamepad_button_check(0, gp_face4);  
 kShootRelease  = keyboard_check_released(ord("E")) || gamepad_button_check_released(0, gp_face4);
 kBlock         = keyboard_check(ord("C"))          || gamepad_button_check(0, gp_face2);
 kShuffle       = keyboard_check(ord("A"))  || gamepad_button_check_pressed(0, gp_shoulderlb);
@@ -167,16 +167,10 @@ else if (cLeft && !onGround && (state!=ROLL)and state != SHOOTING)
 // shot charging
 if (!kBlock and kShoot and state!=ROLL and !cancel) {
 	if(possession){
-		if(shotPower<45){
-			shotPower += 1.5
-		} else if(shotPower<60){
-			shotPower += 1
-		}else if(shotPower<90){
-			shotPower += .5
-		}else{
-			shotPower += .25	
-		}
+		//increase shotpower
+		shotPower+=2.5;
 		facing = team;
+		
 		//can't move while shooting and apply shooting gravity
 		if(state!=SHOOTING){
 			vy = 0; 
@@ -259,17 +253,18 @@ if(kShootRelease and possession){
 		state = IDLE;
 		possession = false;
 		insBall = instance_create(x,y-8,oBall);
-		if(shotPower<15){
+		if(shotPower<30){
 			vx = (-1)*team*6;
-			shotPower = 100;
+			shotPower = shotInitial + 20;
 			insBall.shotPower = shotPower;
 			insBall.shotType = 12;
 			effects_ScreenShake(5,5,5);
 		}else{
 			vx = (-1)*team*4;
-			shotPower = min(shotPower,100)
+			shotPower = shotInitial + shotPower;
+			shotPower = min(shotPower,250)
 			insBall.shotPower = shotPower;
-			insBall.shotType = 11;
+			insBall.shotType = 14;
 			effects_ScreenShake(2,2,5);
 		}
 		insBall.targetGoal = targetGoal;

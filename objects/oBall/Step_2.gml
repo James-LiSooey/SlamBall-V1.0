@@ -5,7 +5,7 @@ if(place_meeting(x,y,oParGoal)){
 	ins_Goal = instance_nearest(x,y,oParGoal);
 	global.game_score[(ins_Goal.team+1)/2] += 1;
 	oGameContoller.alarm[0] = 30;
-
+	effects_ScreenShake(5,5,10);
 	instance_destroy()
 }
 

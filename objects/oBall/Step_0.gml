@@ -22,13 +22,18 @@ if(shotPower>0){
 	shotY = shotY/shotTotal;
 
 	switch(shotType){
-		case STANDARD: 
+		case ARC: 
 			physics_apply_impulse(x,y,shotPower*shotDirection,(-1*shotPower) -40);
 		break;
 		case QUICK: 
 			physics_world_gravity(0,0);
-			physics_apply_impulse(x,y,shotX*shotDirection*80,shotY*80);
-			alarm[1] = 15;
+			physics_apply_impulse(x,y,shotX*shotDirection*shotPower,shotY*shotPower);
+			alarm[1] = shotPower/6;
+		break;
+		case DIRECT: 
+			physics_world_gravity(0,5);
+			physics_apply_impulse(x,y,shotX*shotDirection*shotPower,shotY*shotPower);
+			alarm[1] = shotPower/6;
 		break;
 		
 	}
