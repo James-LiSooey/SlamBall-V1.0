@@ -2,7 +2,7 @@
     "id": "8374228e-12e8-4004-b27b-61fb0addadb8",
     "modelName": "GMSprite",
     "mvc": "1.12",
-    "name": "sPlayerMask",
+    "name": "sPlayerMaskOld",
     "For3D": false,
     "HTile": false,
     "VTile": false,

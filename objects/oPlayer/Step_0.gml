@@ -12,7 +12,7 @@ kDown          = keyboard_check(vk_down)  || gamepad_axis_value(0, gp_axislv) > 
 kJump          = keyboard_check_pressed(ord("S"))  || gamepad_button_check_pressed(0, gp_face1);
 kJumpRelease   = keyboard_check_released(ord("S")) || gamepad_button_check_released(0, gp_face1);
 
-kAction        = keyboard_check_pressed(ord("X"))  || gamepad_button_check_pressed(0, gp_face3);
+kAction        = keyboard_check_pressed(ord("W"))  || gamepad_button_check_pressed(0, gp_face3);
 kShoot         = keyboard_check(ord("E"))          || gamepad_button_check(0, gp_face4);  
 kShootRelease  = keyboard_check_released(ord("E")) || gamepad_button_check_released(0, gp_face4);
 kBlock         = keyboard_check(ord("C"))          || gamepad_button_check(0, gp_face2);
@@ -183,8 +183,19 @@ if (cRight && !onGround && (state!=ROLL)and state != SHOOTING)
 else if (cLeft && !onGround && (state!=ROLL)and state != SHOOTING)
     facing = 1;
 
+//attack
+if (kAction and state!=ROLL and !possession and !attacking) {
+	//attacking = true;
+	ins_attack = instance_create(x, y, oPlayerAtkMask);
+	ins_attack.player_id = id;
+	ins_attack.attackTime = 15;
+	ins_attack.attackSizeX = 3;
+	ins_attack.attackSizeY = 2;
+}
+
+
 // shot charging
-if (!kBlock and kShoot and state!=ROLL and !cancel) {
+if (!kBlock and kShoot and state!=ROLL and !cancel and !attacking) {
 	if(possession){
 		//increase shotpower
 		shotPower+=2.5;

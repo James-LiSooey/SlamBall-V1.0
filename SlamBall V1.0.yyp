@@ -794,7 +794,7 @@
             "Key": "8374228e-12e8-4004-b27b-61fb0addadb8",
             "Value": {
                 "id": "d338c0c1-4934-4fb4-884b-b6ba0abf6690",
-                "resourcePath": "sprites\\sPlayerMask\\sPlayerMask.yy",
+                "resourcePath": "sprites\\sPlayerMaskOld\\sPlayerMaskOld.yy",
                 "resourceType": "GMSprite"
             }
         },
@@ -1020,6 +1020,14 @@
                 "id": "67deda06-e426-4b36-bc97-44bda124b6da",
                 "resourcePath": "objects\\oParSolid\\oParSolid.yy",
                 "resourceType": "GMObject"
+            }
+        },
+        {
+            "Key": "aef72c3b-7b5f-4c05-8c5f-5051c3216eef",
+            "Value": {
+                "id": "029f5f05-0686-418b-ade8-8b62447f77d1",
+                "resourcePath": "sprites\\sPlayerAttackMask\\sPlayerAttackMask.yy",
+                "resourceType": "GMSprite"
             }
         },
         {
@@ -1348,6 +1356,14 @@
                 "id": "a6847160-2167-4d92-8a85-f4add0bfe25f",
                 "resourcePath": "views\\ed537475-0010-4ed7-8e14-6579674ccd52.yy",
                 "resourceType": "GMFolder"
+            }
+        },
+        {
+            "Key": "edab0efa-e066-4972-9e7c-b19eab7c10af",
+            "Value": {
+                "id": "32ea2b08-9241-4d05-b52c-8a5c6fbb5b07",
+                "resourcePath": "objects\\oPlayerAtkMask\\oPlayerAtkMask.yy",
+                "resourceType": "GMObject"
             }
         },
         {

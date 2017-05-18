@@ -38,8 +38,6 @@ if(team==1){
 	targetGoal = oGoalL
 }
 
-
-
 // States
 IDLE     = 10;
 RUN      = 11;
