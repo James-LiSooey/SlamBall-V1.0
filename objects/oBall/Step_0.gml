@@ -17,6 +17,8 @@ if(shotPower>0){
 
 	shotX = targetGoal.x - x;
 	shotY = targetGoal.y-16 - y;
+	show_debug_message(shotX)
+	show_debug_message(targetGoal.x)
 	shotTotal = abs(shotX) + abs(shotY);
 	shotX = shotX/shotTotal;
 	shotY = shotY/shotTotal;
@@ -27,12 +29,12 @@ if(shotPower>0){
 		break;
 		case QUICK: 
 			physics_world_gravity(0,0);
-			physics_apply_impulse(x,y,shotX*shotDirection*shotPower,shotY*shotPower);
+			physics_apply_impulse(x,y,shotX*shotPower,shotY*shotPower);
 			alarm[1] = shotPower/6;
 		break;
 		case DIRECT: 
 			physics_world_gravity(0,5);
-			physics_apply_impulse(x,y,shotX*shotDirection*shotPower,shotY*shotPower);
+			physics_apply_impulse(x,y,shotX*shotPower,shotY*shotPower);
 			alarm[1] = shotPower/6;
 		break;
 		

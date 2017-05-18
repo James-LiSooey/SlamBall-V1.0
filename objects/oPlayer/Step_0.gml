@@ -124,21 +124,40 @@ if (kJump && cRight && !onGround) {
 if (kJump) {
 	//first jump 
     if (onGround) {
-        vy = -jumpHeight;
         yscale = 1.33;
         xscale = 0.67;
 		++jumpCount;
+		
+		if (kRight) {
+			vy = -jumpHeight;
+			vx = jumpHeight * .5;
+		} else if (kLeft) {
+			vy = -jumpHeight;
+			vx = -jumpHeight * .5;
+		} else {
+			vy = -jumpHeight;
+		} 
+		
 	//Double Jump
     }else if(jumpCount<2){
-		vy = -jumpHeight;
         yscale = 1.33;
         xscale = 0.67;
 		++jumpCount;
+		
+		if (kRight) {
+			vy = -jumpHeight;
+			vx = jumpHeight * .5;
+		} else if (kLeft) {
+			vy = -jumpHeight;
+			vx = -jumpHeight * .5;
+		} else {
+			vy = -jumpHeight;
+		} 
 	}
 // Variable jumping
 } else if (kJumpRelease) { 
     if (vy < 0){
-        vy *= 0.25;
+        vy *= 0.5;
 	}
 }
 
@@ -203,10 +222,11 @@ if (!attacking) {
 				facing = 1 - (kLeft*2);
             }else{
 				facing = facingPrev;
-			}					
+			}				
+			
 			//add screenshake for roll duration (14 frames)
 			if(onGround){
-				effects_ScreenShake(0,2,14);
+				effects_ScreenShake(0,1,14);
 			}else{
 				effects_ScreenShake(0,1,5);
 			}
@@ -250,22 +270,24 @@ if(kShootRelease and possession){
 		state = IDLE;
 		shotPower = 0;
 	}else{
+		effectpower = (shotPower+shotInitial)/35;
+		effectpower = min(effectpower,5);
 		state = IDLE;
 		possession = false;
 		insBall = instance_create(x,y-8,oBall);
 		if(shotPower<30){
-			vx = (-1)*team*6;
+			vx = (-1)*team*5;
 			shotPower = shotInitial + 20;
 			insBall.shotPower = shotPower;
 			insBall.shotType = 12;
-			effects_ScreenShake(5,5,5);
+			effects_ScreenShake(3,3,5);
 		}else{
-			vx = (-1)*team*4;
+			vx = (-1)*team*(effectpower+1);
 			shotPower = shotInitial + shotPower;
 			shotPower = min(shotPower,250)
 			insBall.shotPower = shotPower;
 			insBall.shotType = 14;
-			effects_ScreenShake(2,2,5);
+			effects_ScreenShake(effectpower,effectpower,5);
 		}
 		insBall.targetGoal = targetGoal;
 		insBall.shotDirection = team;
@@ -306,6 +328,13 @@ if (sprite_index == sPlayerJab && round(image_index) > 0) {
         bboxtop    = other.y - 1;
         bboxbottom = other.y + 8; 
     }
+}
+
+//need to add facingBeforeRoll
+if(state = SHOOTING){
+	facing = team;
+}else if(!onGround and state != ROLL){
+	facing = facingPrev;
 }
 
 /* */

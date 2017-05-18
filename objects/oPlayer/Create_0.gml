@@ -10,9 +10,9 @@ cancel = false;
 
 // Movement ///////////////////////////////////////////////////////////////////
 
-groundAccel = .50;
-groundFric  = 1.00;
-airAccel    = 0.38;
+groundAccel = .70;
+groundFric  = 1.0;
+airAccel    = 0.10;
 airFric     = 0.25;
 vxMax       = 2.50;
 vyMax       = 5.0;
@@ -31,12 +31,13 @@ shotPower   = 0;
 shotAngle   = 1;
 shotInitial = 70;
 //Team 1 shoots right, Team -1 shoots left
-team = 1;
+team = -1;
 if(team==1){
 	targetGoal = oGoalR
 }else{
-	//goalLocation = oGoalL
+	targetGoal = oGoalL
 }
+
 
 
 // States
