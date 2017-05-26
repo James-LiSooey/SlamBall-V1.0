@@ -12,6 +12,21 @@ if(place_meeting(x,y,oPlayer) and collectible){
 	instance_destroy();
 }
 
+//collision with playerattack
+if(place_meeting(x,y,oPlayerAtkMask) and collectible){
+	
+	playerAtkInst = instance_nearest(x,y,oPlayerAtkMask);
+	playerInst = playerAtkInst.player_id;
+	playerInst.possession = true;
+	instPostMarker = instance_create(playerInst.x,playerInst.y-playerInst.sprite_height,oPosMarker);
+	instPostMarker.player_id = playerInst;
+	phy_linear_velocity_x = 0;
+	phy_linear_velocity_y = 0;
+	phy_active = false
+	
+	instance_destroy();
+}
+
 //Shoot Ball
 if(shotPower>0){
 

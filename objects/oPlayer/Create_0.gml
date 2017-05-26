@@ -31,7 +31,7 @@ shotPower   = 0;
 shotAngle   = 1;
 shotInitial = 70;
 //Team 1 shoots right, Team -1 shoots left
-team = -1;
+team = 1;
 if(team==1){
 	targetGoal = oGoalR
 }else{

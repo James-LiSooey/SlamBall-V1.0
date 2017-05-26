@@ -189,7 +189,7 @@ if (kAction and state!=ROLL and !possession and !attacking) {
 	ins_attack = instance_create(x, y, oPlayerAtkMask);
 	ins_attack.player_id = id;
 	ins_attack.attackTime = 15;
-	ins_attack.attackSizeX = 3;
+	ins_attack.attackSizeX = 5;
 	ins_attack.attackSizeY = 2;
 }
 
