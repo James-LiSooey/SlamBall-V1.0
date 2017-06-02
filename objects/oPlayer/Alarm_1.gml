@@ -1,4 +1,4 @@
 // Roll slash
-attacking = false;
+//attacking = false;
 state     = IDLE; // ?
 

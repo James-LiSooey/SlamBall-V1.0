@@ -13,10 +13,10 @@ kJump          = keyboard_check_pressed(ord("S"))  || gamepad_button_check_press
 kJumpRelease   = keyboard_check_released(ord("S")) || gamepad_button_check_released(0, gp_face1);
 
 kAction        = keyboard_check_pressed(ord("W"))  || gamepad_button_check_pressed(0, gp_face3);
-kShoot         = keyboard_check(ord("E"))          || gamepad_button_check(0, gp_face4);  
-kShootRelease  = keyboard_check_released(ord("E")) || gamepad_button_check_released(0, gp_face4);
+kShoot         = keyboard_check(ord("E"))          || gamepad_button_check(0, gp_face3);  
+kShootRelease  = keyboard_check_released(ord("E")) || gamepad_button_check_released(0, gp_face3);
 kBlock         = keyboard_check(ord("C"))          || gamepad_button_check(0, gp_face2);
-kShuffle       = keyboard_check(ord("A"))  || gamepad_button_check_pressed(0, gp_shoulderlb);
+kShuffle       = keyboard_check(ord("A"))	       || gamepad_button_check(0, gp_shoulderlb);
 kRollR         = keyboard_check_pressed(ord("D"))  || gamepad_button_check_pressed(0, gp_shoulderrb);
 
 // Movement ///////////////////////////////////////////////////////////////////
@@ -184,13 +184,33 @@ else if (cLeft && !onGround && (state!=ROLL)and state != SHOOTING)
     facing = 1;
 
 //attack
-if (kAction and state!=ROLL and !possession and !attacking) {
-	//attacking = true;
+if (kAction and state!=ROLL and !possession and !attacking and canAttack) {
+	attacking = true;
+	canAttack = false;
+	effects_ScreenShake(2,2,5);
 	ins_attack = instance_create(x, y, oPlayerAtkMask);
 	ins_attack.player_id = id;
-	ins_attack.attackTime = 15;
-	ins_attack.attackSizeX = 5;
-	ins_attack.attackSizeY = 2;
+	ins_attack.attackTime = 20;
+	ins_attack.attackSizeX = 2.5;
+	ins_attack.attackSizeY = 2.5;
+	vx = 0;
+	vy = 0;
+	
+	if(kUp){
+		ins_attack.acc_y = -6;
+	}else if(kDown){
+		ins_attack.acc_y = 6;
+		vy = -2*sign(ins_attack.acc_y);
+	}else if(kRight){
+		ins_attack.acc_x = 6;
+	}else if(kLeft){
+		ins_attack.acc_x = -6;
+	}else{
+		ins_attack.acc_x = (facing)*6;
+	}
+	
+	vx = -2*sign(ins_attack.acc_x);
+	
 }
 
 
@@ -272,10 +292,8 @@ if(kShuffle and state != ROLL and state != SHOOTING){
 	facing = team;
 }
     
-
-
 //Shoot Ball
-if(kShootRelease and possession){
+if(kShootRelease and possession and !attacking){
 	if(cancel){
 		cancel = false;
 		state = IDLE;
@@ -304,6 +322,10 @@ if(kShootRelease and possession){
 		insBall.shotDirection = team;
 		shotPower = 0;
 	}
+}
+
+if(kShootRelease){
+	attacking = false;
 }
 
 blocking = kBlock;

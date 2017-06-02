@@ -6,6 +6,7 @@ event_inherited();
 // Semi States
 facing = 1;
 jumpCount = 0;
+canAttack = true;
 cancel = false;
 
 // Movement ///////////////////////////////////////////////////////////////////

@@ -15,6 +15,7 @@ if(place_meeting(x,y,oPlayer) and collectible){
 //collision with playerattack
 if(place_meeting(x,y,oPlayerAtkMask) and collectible){
 	
+	effects_ScreenShake(1,1,5);
 	playerAtkInst = instance_nearest(x,y,oPlayerAtkMask);
 	playerInst = playerAtkInst.player_id;
 	playerInst.possession = true;
@@ -32,8 +33,6 @@ if(shotPower>0){
 
 	shotX = targetGoal.x - x;
 	shotY = targetGoal.y-16 - y;
-	show_debug_message(shotX)
-	show_debug_message(targetGoal.x)
 	shotTotal = abs(shotX) + abs(shotY);
 	shotX = shotX/shotTotal;
 	shotY = shotY/shotTotal;

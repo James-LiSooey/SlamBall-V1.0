@@ -1,6 +1,6 @@
 ///Create oEffect_ScreenShake and shakes screen based on intensity and length of time
-//argument0 = intensity of shake
-//argument1 = intensity of shake
+//argument0 = X coordinate intensity of shake
+//argument1 = Y coordinate intensity of shake
 //argument2 = length of shake
 
 shakeEff = instance_create(0,0, oEffect_ScreenShake)
