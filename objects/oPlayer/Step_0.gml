@@ -2,12 +2,14 @@
 
 // Input //////////////////////////////////////////////////////////////////////
 
-var kLeft, kRight, kUp, kDown, kJump, kJumpRelease, kLeap, kLeapRelease, kAction, kShoot, kShootRelease, kShuffle, kRollR, tempAccel, tempFric;
+var kLeft, kRight, kUp, kDown, kLeftJoyX, kLeftJoyY, kJump, kJumpRelease, kLeap, kLeapRelease, kAction, kShoot, kShootRelease, kShuffle, kRollR, tempAccel, tempFric;
 
 kLeft          = keyboard_check(vk_left)  || gamepad_axis_value(controller, gp_axislh) < -0.4;
 kRight         = keyboard_check(vk_right) || gamepad_axis_value(controller, gp_axislh) >  0.4;
 kUp            = keyboard_check(vk_up)    || gamepad_axis_value(controller, gp_axislv) < -0.4;
 kDown          = keyboard_check(vk_down)  || gamepad_axis_value(controller, gp_axislv) >  0.4;
+kLeftJoyX      = gamepad_axis_value(controller, gp_axislh)
+kLeftJoyY      = gamepad_axis_value(controller, gp_axislv)
 
 kJump          = keyboard_check_pressed(ord("S"))  || gamepad_button_check_pressed(controller, gp_face1);
 kJumpRelease   = keyboard_check_released(ord("S")) || gamepad_button_check_released(controller, gp_face1);
@@ -223,7 +225,10 @@ if (kAction and state!=ROLL and !possession and !attacking and canAttack) {
 	vx = 0;
 	vy = 0;
 	
-	if(kUp){
+	if(abs(kLeftJoyX)>.4 or abs(kLeftJoyY)>.4){
+		ins_attack.acc_y = 6 * (kLeftJoyY/(abs(kLeftJoyX) + abs(kLeftJoyY)));
+		ins_attack.acc_x = 6 * (kLeftJoyX/(abs(kLeftJoyX) + abs(kLeftJoyY)));
+	}else if(kUp){
 		ins_attack.acc_y = -6;
 	}else if(kDown){
 		ins_attack.acc_y = 6;
