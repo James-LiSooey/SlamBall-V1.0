@@ -3,9 +3,13 @@
 // Inherit oParEntity variables
 event_inherited();
 
+//Game Variables
+controller = 0;
+
 // Semi States
 facing = 1;
 jumpCount = 0;
+rollCount = 0;
 canAttack = true;
 cancel = false;
 
@@ -18,6 +22,7 @@ airFric     = 0.25;
 vxMax       = 2.50;
 vyMax       = 5.0;
 jumpHeight  = 9.00;
+leapHeight  = 12.00;
 gravNorm    = 0.38;
 gravSlide   = 0.10; 
 gravShot    = 0.03; 
@@ -35,7 +40,7 @@ shotInitial = 70;
 team = 1;
 if(team==1){
 	targetGoal = oGoalR
-}else{
+}else if(team ==-1){
 	targetGoal = oGoalL
 }
 
@@ -59,7 +64,6 @@ yscale = 1;
 ///////////////////////////////////////////////////////////////////////////////
 
 attacking = false;
-blocking  = false;
 
 //fallTime = 0;
 //fallMax  = 28;

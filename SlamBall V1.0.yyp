@@ -279,10 +279,26 @@
             }
         },
         {
+            "Key": "214a018f-e7ed-457a-8541-28290c858f1c",
+            "Value": {
+                "id": "c13a91d5-b795-430c-b56c-fa18497ebc7b",
+                "resourcePath": "scripts\\CheckAttack\\CheckAttack.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "21e273fd-f794-4066-a9d4-e4771c05a2bd",
             "Value": {
                 "id": "f20fae0d-a3f3-4529-92a1-a45668196c49",
                 "resourcePath": "scripts\\AutoTile\\AutoTile.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
+            "Key": "2287ff58-311f-41a3-b373-3e47d7b15702",
+            "Value": {
+                "id": "3667408a-34bb-48ed-a21f-f0dedbbf2ddf",
+                "resourcePath": "scripts\\AttackHit\\AttackHit.yy",
                 "resourceType": "GMScript"
             }
         },
@@ -404,6 +420,14 @@
                 "id": "b2af2b29-f52b-4712-a285-648d0724f458",
                 "resourcePath": "views\\34bec204-adb2-4e1a-9ac1-b030bdad14d1.yy",
                 "resourceType": "GMFolder"
+            }
+        },
+        {
+            "Key": "34e8739f-5434-4dd0-ba59-224d9f2c7ecb",
+            "Value": {
+                "id": "2df8d6c8-342b-4282-8b81-980ac6dd0ff5",
+                "resourcePath": "objects\\oGoalBlock\\oGoalBlock.yy",
+                "resourceType": "GMObject"
             }
         },
         {
@@ -1223,6 +1247,14 @@
             }
         },
         {
+            "Key": "d4024a7d-7259-419c-acf3-64b3489d8565",
+            "Value": {
+                "id": "2e82783e-eb11-45fc-8dad-8a7edf7380b8",
+                "resourcePath": "scripts\\DislodgeBall\\DislodgeBall.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "d76234ca-a840-42b0-bf5b-368d06ef37ef",
             "Value": {
                 "id": "a362423b-e9c3-4d27-8771-2e9c0e14f7d5",
@@ -1490,7 +1522,10 @@
         "97c5442f-882c-4928-a486-5adb1b51cd85",
         "15e3d07c-a70c-43a7-8bc6-a5717d9d133f",
         "ce9667dd-fd83-45b9-9a95-f798c27654d4",
-        "ead2fa17-ba9f-47d2-bfeb-2fc4201dc5c1"
+        "ead2fa17-ba9f-47d2-bfeb-2fc4201dc5c1",
+        "d4024a7d-7259-419c-acf3-64b3489d8565",
+        "2287ff58-311f-41a3-b373-3e47d7b15702",
+        "214a018f-e7ed-457a-8541-28290c858f1c"
     ],
     "tutorial": ""
 }

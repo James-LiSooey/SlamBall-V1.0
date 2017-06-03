@@ -2,22 +2,23 @@
 
 // Input //////////////////////////////////////////////////////////////////////
 
-var kLeft, kRight, kUp, kDown, kJump, kJumpRelease, kAction, kShoot, kShootRelease, kBlock, kShuffle, kRollR, tempAccel, tempFric;
+var kLeft, kRight, kUp, kDown, kJump, kJumpRelease, kLeap, kLeapRelease, kAction, kShoot, kShootRelease, kShuffle, kRollR, tempAccel, tempFric;
 
-kLeft          = keyboard_check(vk_left)  || gamepad_axis_value(0, gp_axislh) < -0.4;
-kRight         = keyboard_check(vk_right) || gamepad_axis_value(0, gp_axislh) >  0.4;
-kUp            = keyboard_check(vk_up)    || gamepad_axis_value(0, gp_axislv) < -0.4;
-kDown          = keyboard_check(vk_down)  || gamepad_axis_value(0, gp_axislv) >  0.4;
+kLeft          = keyboard_check(vk_left)  || gamepad_axis_value(controller, gp_axislh) < -0.4;
+kRight         = keyboard_check(vk_right) || gamepad_axis_value(controller, gp_axislh) >  0.4;
+kUp            = keyboard_check(vk_up)    || gamepad_axis_value(controller, gp_axislv) < -0.4;
+kDown          = keyboard_check(vk_down)  || gamepad_axis_value(controller, gp_axislv) >  0.4;
 
-kJump          = keyboard_check_pressed(ord("S"))  || gamepad_button_check_pressed(0, gp_face1);
-kJumpRelease   = keyboard_check_released(ord("S")) || gamepad_button_check_released(0, gp_face1);
+kJump          = keyboard_check_pressed(ord("S"))  || gamepad_button_check_pressed(controller, gp_face1);
+kJumpRelease   = keyboard_check_released(ord("S")) || gamepad_button_check_released(controller, gp_face1);
+kLeap          = keyboard_check_pressed(ord("C"))  || gamepad_button_check_pressed(controller, gp_face2);
+kLeapRelease   = keyboard_check_released(ord("C")) || gamepad_button_check_released(controller, gp_face2);
 
-kAction        = keyboard_check_pressed(ord("W"))  || gamepad_button_check_pressed(0, gp_face3);
-kShoot         = keyboard_check(ord("E"))          || gamepad_button_check(0, gp_face3);  
-kShootRelease  = keyboard_check_released(ord("E")) || gamepad_button_check_released(0, gp_face3);
-kBlock         = keyboard_check(ord("C"))          || gamepad_button_check(0, gp_face2);
-kShuffle       = keyboard_check(ord("A"))	       || gamepad_button_check(0, gp_shoulderlb);
-kRollR         = keyboard_check_pressed(ord("D"))  || gamepad_button_check_pressed(0, gp_shoulderrb);
+kAction        = keyboard_check_pressed(ord("W"))  || gamepad_button_check_pressed(controller, gp_face3);
+kShoot         = keyboard_check(ord("E"))          || gamepad_button_check(controller, gp_face3);  
+kShootRelease  = keyboard_check_released(ord("E")) || gamepad_button_check_released(controller, gp_face3);
+kShuffle       = keyboard_check(ord("A"))	       || gamepad_button_check(controller, gp_shoulderlb);
+kRollR         = keyboard_check_pressed(ord("D"))  || gamepad_button_check_pressed(controller, gp_shoulderrb);
 
 // Movement ///////////////////////////////////////////////////////////////////
 
@@ -26,7 +27,8 @@ facingPrev = facing;
 
 // Apply the correct form of acceleration and friction
 if (onGround) {
-	jumpCount = 0;  
+	jumpCount = 0; 
+	rollCount = 0; 
     tempAccel = groundAccel;
     tempFric  = groundFric;
 } else {
@@ -130,10 +132,10 @@ if (kJump) {
 		
 		if (kRight) {
 			vy = -jumpHeight;
-			vx = jumpHeight * .5;
+			vx = jumpHeight * .3;
 		} else if (kLeft) {
 			vy = -jumpHeight;
-			vx = -jumpHeight * .5;
+			vx = -jumpHeight * .3;
 		} else {
 			vy = -jumpHeight;
 		} 
@@ -146,10 +148,10 @@ if (kJump) {
 		
 		if (kRight) {
 			vy = -jumpHeight;
-			vx = jumpHeight * .5;
+			vx = jumpHeight * .3;
 		} else if (kLeft) {
 			vy = -jumpHeight;
-			vx = -jumpHeight * .5;
+			vx = -jumpHeight * .3;
 		} else {
 			vy = -jumpHeight;
 		} 
@@ -160,6 +162,31 @@ if (kJump) {
         vy *= 0.5;
 	}
 }
+
+// Leap 
+if (kLeap and !possession and jumpCount<3) {
+	//first jump 
+    yscale = 1.33;
+    xscale = 0.67;
+	jumpCount = 10;
+		
+	if (kRight) {
+		vy = -leapHeight* .75;
+		vx = leapHeight;
+	} else if (kLeft) {
+		vy = -leapHeight* .75;
+		vx = -leapHeight;
+	} else {
+		vx = (facing)*leapHeight;
+		vy = -leapHeight* .75;
+	}
+// Variable jumping
+} else if (kLeapRelease) { 
+    if (vy < 0){
+        vy *= 0.75;
+	}
+}
+
 
 if (onGround) {
         // Fall thru platform
@@ -215,7 +242,7 @@ if (kAction and state!=ROLL and !possession and !attacking and canAttack) {
 
 
 // shot charging
-if (!kBlock and kShoot and state!=ROLL and !cancel and !attacking) {
+if (kShoot and state!=ROLL and !cancel and !attacking) {
 	if(possession){
 		//increase shotpower
 		shotPower+=2.5;
@@ -248,7 +275,10 @@ if (!attacking) {
             
             state = ROLL;
         } else*/ 
-		if (kRollR) {
+		if (kRollR and rollCount<2) {
+			if(!onGround){
+				rollCount++;
+			}
 			if(kLeft || kRight){
 				facing = 1 - (kLeft*2);
             }else{
@@ -275,7 +305,11 @@ if (!attacking) {
 
 // Roll speed
 if (state == ROLL) {
-    vx = facing * 6;
+	if(onGround){
+		vx = facing * 6;
+	}else{
+		vx = facing * 4;
+	}
     vy = 0;
     // Break out of roll
         //if (!onGround || (cLeft || cRight)) {
@@ -327,8 +361,6 @@ if(kShootRelease and possession and !attacking){
 if(kShootRelease){
 	attacking = false;
 }
-
-blocking = kBlock;
 
 /* */
 /// Squash + stretch
