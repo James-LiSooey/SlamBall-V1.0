@@ -38,36 +38,20 @@ if (onGround) {
     tempFric  = airFric;
 }
 
-// Reset wall cling
-if ((!cRight && !cLeft) || onGround) {
-    canStick = true;
-    sticking = false;
-}   
-
-// Cling to wall
-if (((kRight && cLeft) || (kLeft && cRight)) && canStick && !onGround) {
-    alarm[0] = clingTime;
-    sticking = true; 
-    canStick = false;
-	jumpCount = 0;       
-}
-
 // Handle gravity
 if (!onGround and (state != ROLL)) {
+	//fall slower when shooting
     if(state = SHOOTING){
 		vy = Approach(vy, vyMax, gravShot);
-	}else if ((cLeft || cRight) && vy >= 0) {
-        // Wall slide
-        vy = Approach(vy, vyMax, gravSlide);
+	// Fall normally
     } else {
-        // Fall normally
         vy = Approach(vy, vyMax, gravNorm);
     }
 }
 
 if (state != ROLL and state !=SHOOTING) {
 // Left 
-if (kLeft && !kRight && !sticking) {
+if (kLeft && !kRight) {
     facing = -1;
     state  = RUN;
     
@@ -76,7 +60,7 @@ if (kLeft && !kRight && !sticking) {
         vx = Approach(vx, 0, tempFric);   
     vx = Approach(vx, -vxMax, tempAccel);
 // Right
-} else if (kRight && !kLeft && !sticking) {
+} else if (kRight && !kLeft) {
     facing = 1;
     state  = RUN;
     
@@ -94,35 +78,6 @@ if (!kRight && !kLeft) {
     if (state != ROLL and state != SHOOTING)
         state = IDLE;
 } 
-       
-// Wall jump
-if (kJump && cLeft && !onGround) {
-    yscale = 1.33;
-    xscale = 0.67;
-	++jumpCount;
-            
-    if (kLeft) {
-        vy = -jumpHeight * 1.2;
-        vx =  jumpHeight * .66;
-    } else {
-        vy = -jumpHeight * 1.1;
-        vx =  vxMax; 
-    }  
-}
-
-if (kJump && cRight && !onGround) {
-    yscale = 1.33;
-    xscale = 0.67;
-	++jumpCount;
-    
-    if (kRight) {
-        vy = -jumpHeight * 1.2;
-        vx = -jumpHeight * .66;
-    } else {
-        vy = -jumpHeight * 1.1;
-        vx = -vxMax;
-    }  
-}
  
 // Jump 
 if (kJump) {
@@ -182,20 +137,17 @@ if (kLeap and !possession and jumpCount<3) {
 		vx = (facing)*leapHeight;
 		vy = -leapHeight* .75;
 	}
-// Variable jumping
+// Variable leaping
 } else if (kLeapRelease) { 
     if (vy < 0){
         vy *= 0.75;
 	}
 }
 
-
-if (onGround) {
-        // Fall thru platform
-    if (kDown) {
-        if (place_meeting(x, y + 4, oParJumpThru)){
-            ++y;
-		}
+// Fall thru platform
+if (onGround and kDown) {
+    if (place_meeting(x, y + 4, oParJumpThru)){
+        ++y;
 	}
 }
 
@@ -208,9 +160,11 @@ else if (random(100) > 85 && abs(vx) > 0.5)
 
 // Swap facing during wall slide
 if (cRight && !onGround && (state!=ROLL)and state != SHOOTING)
-    facing = -1;
+    facing=facing
+	//facing = -1;
 else if (cLeft && !onGround && (state!=ROLL)and state != SHOOTING)
-    facing = 1;
+    facing=facing
+	//facing = 1;
 
 //attack
 if (kAction and state!=ROLL and !possession and !attacking and canAttack) {
@@ -269,43 +223,29 @@ if (kShoot and state!=ROLL and !cancel and !attacking) {
 
 // Roll
 //if (onGround && !attacking) {
-if (!attacking) {
-    if (state != ROLL) {
-        /*if (kRollL) {
-            facing = -1;
-            
-            image_index  = 0;
-            image_speed  = 0.5;
-            sprite_index = sPlayerRoll;
-            
-            state = ROLL;
-        } else*/ 
-		if (kRollR and rollCount<2) {
-			if(!onGround){
-				rollCount++;
-			}
-			if(kLeft || kRight){
-				facing = 1 - (kLeft*2);
-            }else{
-				facing = facingPrev;
-			}				
+if (!attacking and state != ROLL and kRollR and rollCount<1) {
+	if(!onGround){
+		rollCount++;
+	}
+	if(kLeft || kRight){
+		facing = 1 - (kLeft*2);
+    }else{
+		facing = facingPrev;
+	}				
 			
-			//add screenshake for roll duration (14 frames)
-			if(onGround){
-				effects_ScreenShake(0,1,14);
-			}else{
-				effects_ScreenShake(0,1,5);
-			}
-            image_index  = 0;
-            image_speed  = 0.5;
-            sprite_index = sPlayerRoll;
-            if(state = SHOOTING){
-				cancel = true;
-			}			
-			
-            state = ROLL;
-        }
-    }
+	//add screenshake for roll duration (14 frames)
+	if(onGround){
+		effects_ScreenShake(0,1,14);
+	}else{
+		effects_ScreenShake(0,1,5);
+	}
+    image_index  = 0;
+    image_speed  = 0.5;
+    sprite_index = sPlayerRoll;
+    if(state = SHOOTING){
+		cancel = true;
+	}						
+    state = ROLL;
 }
 
 // Roll speed
@@ -316,8 +256,7 @@ if (state == ROLL) {
 		vx = facing * 4;
 	}
     vy = 0;
-    // Break out of roll
-        //if (!onGround || (cLeft || cRight)) {
+
 	if ((cLeft || cRight)) {
         state = IDLE;
         if (!attacking){
@@ -372,33 +311,6 @@ if(kShootRelease){
 xscale = Approach(xscale, 1, 0.05);
 yscale = Approach(yscale, 1, 0.05);
 
-/* */
-/// Hitbox
-
-with (oPlayerAtkBox)
-    instance_destroy();
-
-// Dash out of roll
-if (sprite_index == sPlayerRollSlash) {    
-    with (instance_create(x, y, oPlayerAtkBox)) {
-        bboxleft  = min(other.x + (5 * other.facing), other.x + (24 * other.facing));
-        bboxright = max(other.x + (5 * other.facing), other.x + (24 * other.facing));
-        
-        bboxtop    = other.y - 1;
-        bboxbottom = other.y + 8; 
-    }
-}
-    
-// Jab
-if (sprite_index == sPlayerJab && round(image_index) > 0) {    
-    with (instance_create(x, y, oPlayerAtkBox)) {
-        bboxleft  = min(other.x + (5 * other.facing), other.x + (30 * other.facing));
-        bboxright = max(other.x + (5 * other.facing), other.x + (30 * other.facing));
-        
-        bboxtop    = other.y - 1;
-        bboxbottom = other.y + 8; 
-    }
-}
 
 //need to add facingBeforeRoll
 if(state = SHOOTING){

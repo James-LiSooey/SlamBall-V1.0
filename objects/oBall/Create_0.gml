@@ -17,6 +17,10 @@ dislodgey =0;
 
 shotType = 11;
 
+BALLGRAV = 60;
+CURRENTGRAV = BALLGRAV
+GRAVSTEP = 5;
+
 physics_world_gravity(0,60);
 
 

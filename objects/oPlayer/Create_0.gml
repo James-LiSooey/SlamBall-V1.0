@@ -6,13 +6,6 @@ event_inherited();
 //Game Variables
 controller = 0;
 
-// Semi States
-facing = 1;
-jumpCount = 0;
-rollCount = 0;
-canAttack = true;
-cancel = false;
-
 // Movement ///////////////////////////////////////////////////////////////////
 
 groundAccel = .70;
@@ -53,9 +46,15 @@ SHOOTING = 14;
 RECOIL   = 15;
 
 // Initialize properties
+facing = 1;
+jumpCount = 0;
+rollCount = 0;
+canAttack = true;
+cancel = false;
 state  = IDLE;
 facing = image_xscale; // Change xscale in editor to adjust initial facing
 facingPrev = facing
+attacking = false;
 
 // For squash + stretch
 xscale = 1;
@@ -63,7 +62,7 @@ yscale = 1;
 
 ///////////////////////////////////////////////////////////////////////////////
 
-attacking = false;
+
 
 //fallTime = 0;
 //fallMax  = 28;

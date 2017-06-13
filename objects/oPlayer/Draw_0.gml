@@ -24,9 +24,6 @@ if (!attacking) {
                 }
             }
              
-            // When against a wall   
-            if (cRight || cLeft)
-                sprite_index = sPlayerSlide;  
         break;
         
         case ROLL:
