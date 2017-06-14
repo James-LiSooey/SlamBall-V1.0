@@ -15,7 +15,8 @@ if(place_meeting(x,y,oPlayer) and collectible){
 //collision with playerattack
 if(place_meeting(x,y,oPlayerAtkMask) and collectible){
 	
-	effects_ScreenShake(1,1,5);
+	FxSleep(1,30);
+	FxScreenShake(1,1,5);
 	playerAtkInst = instance_nearest(x,y,oPlayerAtkMask);
 	playerInst = playerAtkInst.player_id;
 	playerInst.possession = true;
@@ -66,6 +67,7 @@ if(shotPower>0){
 	CURRENTGRAV = 5;
 	BALLGRAV = 5;
 	shotPower = 0;
+	FxSleep(1,12);
 	alarm[0] = 180;
 }
 

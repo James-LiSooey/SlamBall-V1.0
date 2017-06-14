@@ -2,7 +2,7 @@
     "id": "4797f30f-8425-4427-829f-334ccd93c55b",
     "modelName": "GMObject",
     "mvc": "1.0",
-    "name": "oEffect_ScreenShake",
+    "name": "oFxScreenShake",
     "eventList": [
         {
             "id": "2b0d85a2-f15e-4ac7-aa2e-2fb2974ed888",

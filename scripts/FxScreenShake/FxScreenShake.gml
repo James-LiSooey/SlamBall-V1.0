@@ -3,7 +3,7 @@
 //argument1 = Y coordinate intensity of shake
 //argument2 = length of shake
 
-shakeEff = instance_create(0,0, oEffect_ScreenShake)
+shakeEff = instance_create(0,0, oFxScreenShake)
 
 shakeEff.alarm[0] = argument2
 shakeEff.intensity_X = argument0

@@ -12,5 +12,6 @@
 	insBall.dislodgex = argument1;
 	insBall.dislodgey = argument2;
 	
-	effects_ScreenShake(3,3,5);
+	FxSleep(1,10)
+	FxScreenShake(3,3,5);
 	instance_destroy();

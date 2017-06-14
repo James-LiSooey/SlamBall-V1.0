@@ -170,7 +170,7 @@ else if (cLeft && !onGround && (state!=ROLL)and state != SHOOTING)
 if (kAction and state!=ROLL and !possession and !attacking and canAttack) {
 	attacking = true;
 	canAttack = false;
-	effects_ScreenShake(2,2,5);
+	FxScreenShake(2,2,5);
 	ins_attack = instance_create(x, y, oPlayerAtkMask);
 	ins_attack.player_id = id;
 	ins_attack.attackTime = 20;
@@ -235,9 +235,9 @@ if (!attacking and state != ROLL and kRollR and rollCount<1) {
 			
 	//add screenshake for roll duration (14 frames)
 	if(onGround){
-		effects_ScreenShake(0,1,14);
+		FxScreenShake(0,1,14);
 	}else{
-		effects_ScreenShake(0,1,5);
+		FxScreenShake(0,1,5);
 	}
     image_index  = 0;
     image_speed  = 0.5;
@@ -287,14 +287,14 @@ if(kShootRelease and possession and !attacking){
 			shotPower = shotInitial + 20;
 			insBall.shotPower = shotPower;
 			insBall.shotType = 12;
-			effects_ScreenShake(3,3,5);
+			FxScreenShake(3,3,5);
 		}else{
 			vx = (-1)*team*(effectpower+1);
 			shotPower = shotInitial + shotPower;
 			shotPower = min(shotPower,250)
 			insBall.shotPower = shotPower;
 			insBall.shotType = 14;
-			effects_ScreenShake(effectpower,effectpower,5);
+			FxScreenShake(effectpower,effectpower,5);
 		}
 		insBall.targetGoal = targetGoal;
 		insBall.shotDirection = team;

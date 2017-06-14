@@ -95,6 +95,14 @@
             }
         },
         {
+            "Key": "0a676e29-4e01-4376-bd0e-1cb407ebc65c",
+            "Value": {
+                "id": "533b8322-934c-46a4-80a1-caa93791b5b3",
+                "resourcePath": "scripts\\FxSleep\\FxSleep.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "0a8e8723-60b1-4917-8bee-ec81b9901440",
             "Value": {
                 "id": "38219ca0-aabb-4279-86ce-105aae99f766",
@@ -220,6 +228,14 @@
                 "id": "9801462a-0c12-42dc-b406-69c7716817b7",
                 "resourcePath": "rooms\\rmTest\\rmTest.yy",
                 "resourceType": "GMRoom"
+            }
+        },
+        {
+            "Key": "16496ed1-3479-42fb-bc31-9efcbc185efa",
+            "Value": {
+                "id": "d3067a24-d57f-49ce-90a8-8d322551cfba",
+                "resourcePath": "objects\\oFxSleep\\oFxSleep.yy",
+                "resourceType": "GMObject"
             }
         },
         {
@@ -506,7 +522,7 @@
             "Key": "4797f30f-8425-4427-829f-334ccd93c55b",
             "Value": {
                 "id": "1eb88635-a0b9-4415-a6d8-d9ec905257da",
-                "resourcePath": "objects\\oEffect_ScreenShake\\oEffect_ScreenShake.yy",
+                "resourcePath": "objects\\oFxScreenShake\\oFxScreenShake.yy",
                 "resourceType": "GMObject"
             }
         },
@@ -602,7 +618,7 @@
             "Key": "5e073dfd-6ab5-4514-9c4b-87cfc275aae3",
             "Value": {
                 "id": "6a830513-941f-48e9-b945-a01f741adbe1",
-                "resourcePath": "scripts\\effects_ScreenShake\\effects_ScreenShake.yy",
+                "resourcePath": "scripts\\FxScreenShake\\FxScreenShake.yy",
                 "resourceType": "GMScript"
             }
         },
@@ -1525,7 +1541,8 @@
         "ead2fa17-ba9f-47d2-bfeb-2fc4201dc5c1",
         "d4024a7d-7259-419c-acf3-64b3489d8565",
         "2287ff58-311f-41a3-b373-3e47d7b15702",
-        "214a018f-e7ed-457a-8541-28290c858f1c"
+        "214a018f-e7ed-457a-8541-28290c858f1c",
+        "0a676e29-4e01-4376-bd0e-1cb407ebc65c"
     ],
     "tutorial": ""
 }
