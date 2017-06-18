@@ -31,6 +31,7 @@ if (!attacking) {
         break;
 		
 		case SHOOTING:
+			image_speed = 0.33;
 			sprite_index = sPlayerIdleShield;
 		break;
 		

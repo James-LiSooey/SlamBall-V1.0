@@ -80,7 +80,7 @@ if (!kRight && !kLeft) {
 } 
  
 // Jump 
-if (kJump) {
+if (kJump and state!=SHOOTING) {
 	//first jump 
     if (onGround) {
         yscale = 1.33;
@@ -114,7 +114,7 @@ if (kJump) {
 		} 
 	}
 // Variable jumping
-} else if (kJumpRelease) { 
+} else if (kJumpRelease and state!=SHOOTING) { 
     if (vy < 0){
         vy *= 0.5;
 	}
@@ -223,7 +223,7 @@ if (kShoot and state!=ROLL and !cancel and !attacking) {
 
 // Roll
 //if (onGround && !attacking) {
-if (!attacking and state != ROLL and kRollR and rollCount<1) {
+if (!attacking and state != ROLL and kRollR and rollCount<2) {
 	if(!onGround){
 		rollCount++;
 	}
@@ -236,11 +236,13 @@ if (!attacking and state != ROLL and kRollR and rollCount<1) {
 	//add screenshake for roll duration (14 frames)
 	if(onGround){
 		FxScreenShake(0,1,14);
+		image_speed  = 0.5;
 	}else{
 		FxScreenShake(0,1,5);
+		image_speed  = 1;
 	}
     image_index  = 0;
-    image_speed  = 0.5;
+    
     sprite_index = sPlayerRoll;
     if(state = SHOOTING){
 		cancel = true;
@@ -253,7 +255,7 @@ if (state == ROLL) {
 	if(onGround){
 		vx = facing * 6;
 	}else{
-		vx = facing * 4;
+		vx = facing * 6;
 	}
     vy = 0;
 

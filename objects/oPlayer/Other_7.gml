@@ -5,7 +5,7 @@ if (sprite_index == sPlayerJab){
 if (sprite_index == sPlayerRoll) {
     if (!attacking)
         alarm[1] = -1;
-            
+    image_speed  = 1;        
     state = IDLE;
 }
 

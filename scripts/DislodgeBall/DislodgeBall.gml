@@ -4,6 +4,7 @@
 	argument0.vy = -3
 	argument0.vx = argument1 + ((-1)*sign(argument1));
 	argument0.jumpCount = 10;
+	argument0.state = argument0.IDLE;
 		
 	insBall = instance_create(argument0.x,argument0.y-8,oBall);
 	insBall.shotPower = 65;
