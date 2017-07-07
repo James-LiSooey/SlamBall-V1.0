@@ -9,6 +9,9 @@ if (!attacking) {
         case RUN: 
             image_speed = 0.33; 
             sprite_index = sPlayerRun;
+			if (random(100) > 85){
+				instance_create(x, y + 8, oParticlePlayer);
+			}
         break;
         
         case JUMP:
@@ -40,6 +43,7 @@ if (!attacking) {
 		break;
     }
 }
+
 
 // Draw player
 if (onGround)

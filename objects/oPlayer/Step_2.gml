@@ -1,7 +1,3 @@
-/// Entity Step 2.0
-
-/// EntityStep();
-
 jumped = false;
 landed = false;
 
@@ -25,16 +21,17 @@ if (platformTarget) {
         with (platformTarget) other.vy = 0;
 }
 
-repeat(abs(vx)) {
-    if (place_meeting(x + sign(vx), y, oParSolid) && !place_meeting(x + sign(vx), y - 1, oParSolid))
-        y -= 1;
-         
-    if (place_meeting(x + sign(vx), y + 2, oParSolid) && !place_meeting(x + sign(vx), y + 1, oParSolid))
-        y += 1; 
-          
-    if (!place_meeting(x + sign(vx), y, oParSolid))
-        x += sign(vx);
-    else
-        vx = 0;
-}
 
+repeat(abs(vx)) {
+
+	if (place_meeting(x + sign(vx), y, oParSolid) && !place_meeting(x + sign(vx), y - 1, oParSolid))
+	    y -= 1;
+         
+	if (place_meeting(x + sign(vx), y + 2, oParSolid) && !place_meeting(x + sign(vx), y + 1, oParSolid))
+	    y += 1; 
+          
+	if (!place_meeting(x + sign(vx), y, oParSolid))
+	    x += sign(vx);
+	else
+	    vx = 0;
+}

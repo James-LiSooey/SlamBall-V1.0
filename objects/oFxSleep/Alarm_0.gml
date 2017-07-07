@@ -1,3 +1,5 @@
 /// @description Reset Room_Speed
-room_speed = 60;
+
+global.gamespeed = 1;
+
 instance_destroy();

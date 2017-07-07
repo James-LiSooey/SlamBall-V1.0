@@ -11,7 +11,7 @@
         "ce9667dd-fd83-45b9-9a95-f798c27654d4"
     ],
     "filterType": "GMScript",
-    "folderName": "compatibility",
+    "folderName": "Compatibility",
     "isDefaultView": false,
     "localisedFolderName": ""
 }

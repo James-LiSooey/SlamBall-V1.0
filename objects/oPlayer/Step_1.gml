@@ -1,6 +1,9 @@
 var onGroundPrev = onGround;
 
-event_inherited();
+onGround = OnGround();
+
+cLeft  = place_meeting(x - 1, y, oBlock); 
+cRight = place_meeting(x + 1, y, oBlock);
 
 if (onGround && !onGroundPrev) {
     for (var i = 0; i < 4; ++i) {
