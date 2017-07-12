@@ -519,6 +519,14 @@
             }
         },
         {
+            "Key": "46ed0929-1fb7-436a-b98c-1899735e5fb2",
+            "Value": {
+                "id": "8458add5-ab29-4e9f-a04d-ea5d0b6b07cf",
+                "resourcePath": "objects\\oParAttack\\oParAttack.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
             "Key": "4797f30f-8425-4427-829f-334ccd93c55b",
             "Value": {
                 "id": "1eb88635-a0b9-4415-a6d8-d9ec905257da",

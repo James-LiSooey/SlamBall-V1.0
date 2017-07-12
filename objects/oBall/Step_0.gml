@@ -13,11 +13,11 @@ if(place_meeting(x,y,oPlayer) and collectible){
 }
 
 //collision with playerattack
-if(place_meeting(x,y,oPlayerAtkMask) and collectible){
+if(place_meeting(x,y,oParAttack) and collectible){
 	
 	FxSleep(1,30);
 	FxScreenShake(1,1,5);
-	playerAtkInst = instance_nearest(x,y,oPlayerAtkMask);
+	playerAtkInst = instance_nearest(x,y,oParAttack);
 	playerInst = playerAtkInst.player_id;
 	playerInst.possession = true;
 	instPostMarker = instance_create(playerInst.x,playerInst.y-playerInst.sprite_height,oPosMarker);
