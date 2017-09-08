@@ -1,9 +1,10 @@
 
 kRollR = argument0
+kRollL = argument1
 
 // Roll
 //if (onGround && !attacking) {
-if (!attacking and state != ROLL and kRollR and rollCount<2) {
+if (!attacking and state != ROLL and (kRollR or kRollL) and rollCount<2) {
 	if(!onGround){
 		rollCount++;
 	}
@@ -11,7 +12,11 @@ if (!attacking and state != ROLL and kRollR and rollCount<2) {
 		facing = 1 - (kLeft*2);
     }else{
 		facing = facingPrev;
-	}				
+	}	
+	
+	if(kRollL){
+		rollDir = -1;
+	}			
 			
 	//add screenshake for roll duration (14 frames)
 	if(onGround){
@@ -33,9 +38,9 @@ if (!attacking and state != ROLL and kRollR and rollCount<2) {
 // Roll speed
 if (state == ROLL) {
 	if(onGround){
-		vx = facing * RollSpeed;
+		vx = rollDir * RollSpeed;
 	}else{
-		vx = facing * RollSpeed;
+		vx = rollDir * RollSpeed;
 	}
     vy = 0;
 
@@ -45,4 +50,6 @@ if (state == ROLL) {
             alarm[1] = -1;
 		}
     }
+}else{
+	rollDir = 1;
 }

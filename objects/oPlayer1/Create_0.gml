@@ -13,7 +13,7 @@ groundFric  = 1.0;
 airAccel    = 0.10;
 airFric     = 0.25;
 vxMax       = 2.50;
-vyMax       = 4.0;
+vyMax       = 5.0;
 jumpHeight  = 9.00;	
 gravNorm    = 0.38;
 gravSlide   = 0.10; 
@@ -54,7 +54,6 @@ state  = IDLE;
 facing = image_xscale; // Change xscale in editor to adjust initial facing
 facingPrev = facing
 attacking = false;
-rollDir = 1;
 
 // For squash + stretch
 xscale = 1;

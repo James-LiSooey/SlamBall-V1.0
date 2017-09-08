@@ -2,7 +2,7 @@
 
 // Input //////////////////////////////////////////////////////////////////////
 
-var kLeft, kRight, kUp, kDown, kLeftJoyX, kLeftJoyY, kJump, kJumpRelease, kLeap, kLeapRelease, kAction, kShoot, kShootRelease, kRollL, kRollR, tempAccel, tempFric;
+var kLeft, kRight, kUp, kDown, kLeftJoyX, kLeftJoyY, kJump, kJumpRelease, kLeap, kLeapRelease, kAction, kShoot, kShootRelease, kShuffle, kRollR, tempAccel, tempFric;
 
 kLeft          = keyboard_check(vk_left)  || gamepad_axis_value(controller, gp_axislh) < -0.4;
 kRight         = keyboard_check(vk_right) || gamepad_axis_value(controller, gp_axislh) >  0.4;
@@ -19,7 +19,7 @@ kLeapRelease   = keyboard_check_released(ord("C")) || gamepad_button_check_relea
 kAction        = keyboard_check_pressed(ord("W"))  || gamepad_button_check_pressed(controller, gp_face3);
 kShoot         = keyboard_check(ord("E"))          || gamepad_button_check(controller, gp_face3);  
 kShootRelease  = keyboard_check_released(ord("E")) || gamepad_button_check_released(controller, gp_face3);
-kRollL         = keyboard_check_pressed(ord("A"))  || gamepad_button_check_pressed(controller, gp_shoulderlb);
+kShuffle       = keyboard_check(ord("A"))	       || gamepad_button_check(controller, gp_shoulderlb);
 kRollR         = keyboard_check_pressed(ord("D"))  || gamepad_button_check_pressed(controller, gp_shoulderrb);
 
 // Movement ///////////////////////////////////////////////////////////////////
@@ -60,15 +60,10 @@ spBlast(kAction, kLeftJoyX, kLeftJoyY, kUp, kDown, kRight, kLeft);
 shBasic(kShoot, kShootRelease);
 
 // Roll
-mvRoll(kRollR, kRollL);
+mvRoll(kRollR);
 
-/* shuffle
+// shuffle
 if(kShuffle and state != ROLL and state != SHOOTING){
-	facing = team;
-}*/
-
-//possession sets facing
-if(possession and state != ROLL and state != SHOOTING){
 	facing = team;
 }
     
